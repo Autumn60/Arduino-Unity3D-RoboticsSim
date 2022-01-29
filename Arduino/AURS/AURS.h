@@ -111,8 +111,7 @@ namespace AURS
             {
                 str += (virtualActuators[i]->moduleID + ":" + virtualActuators[i]->value + ",");
             }
-            str += '\n';
-            Serial.print(str);
+            Serial.println(str);
         }
         void Receive()
         {

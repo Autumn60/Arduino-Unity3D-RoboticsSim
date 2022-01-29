@@ -26,7 +26,7 @@ namespace AURS
 
             void writeMicroseconds(int pulse)
             {
-                value = String((int)((constrain(pulse, 1000, 2000) - 1500) * 0.2));
+                value = String((int)((constrain(pulse, 1000, 2000) - 1500)));
             }
         }; // class VirtualMotor
     }      // namespace Actuators
