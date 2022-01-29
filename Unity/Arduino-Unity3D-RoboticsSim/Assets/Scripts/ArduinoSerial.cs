@@ -35,7 +35,6 @@ public class ArduinoSerial : MonoBehaviour {
 
 	void Update () {
         if(sending==false)Task.Run(Send);
-        
         if(receiving==false)Task.Run(Receive);
 	}
 
@@ -55,12 +54,14 @@ public class ArduinoSerial : MonoBehaviour {
             string str;
             str = arduino.ReadLine();
             var subStrings = str.Split(',');
+            
             foreach(var ss in subStrings)
             {
                 var pair = ss.Split(':');
-                if(pair[1]!=null)
+                if(pair.Length == 2 && pair[1]!="")
                     recievedData[pair[0]] = pair[1];
             }
+            
 		}
         Thread.Sleep(rate);
         receiving = false;
