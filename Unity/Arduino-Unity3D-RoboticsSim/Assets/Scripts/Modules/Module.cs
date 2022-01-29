@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Modules : MonoBehaviour
+public class Module : MonoBehaviour
 {
     [SerializeField]
     public string moduleID;
@@ -12,7 +12,7 @@ public class Modules : MonoBehaviour
         Sensor
     }
 
-    [SerializeField]
+    [System.NonSerialized]
     public ModuleType moduleType;
 
     public virtual void SetValue(string newValue){

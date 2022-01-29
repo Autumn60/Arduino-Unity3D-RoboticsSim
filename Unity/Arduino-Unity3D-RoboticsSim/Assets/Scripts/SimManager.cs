@@ -9,7 +9,7 @@ public class SimManager : MonoBehaviour
     ArduinoSerial arduinoSerial;
 
     [SerializeField]
-    private Modules[] modules;
+    private Module[] modules;
 
     private int actuatorCount;
 
@@ -19,7 +19,7 @@ public class SimManager : MonoBehaviour
         actuatorCount = 0;
         Array.Sort(modules, (a, b) => a.moduleType- b.moduleType);
         for(int i = 0;i<modules.Length;i++){
-            if(modules[i].moduleType == Modules.ModuleType.Actuator)
+            if(modules[i].moduleType == Module.ModuleType.Actuator)
                 actuatorCount++;
         }
     }

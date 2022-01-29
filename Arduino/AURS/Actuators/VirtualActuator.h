@@ -17,5 +17,6 @@ namespace AURS
 } // namespace AURS
 
 #include "VirtualMotor.h"
+#include "VirtualSerial.h"
 
 #endif
