@@ -2,8 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Encoder : Modules
+public class Encoder : Module
 {
+    Encoder()
+    {
+        moduleType = Module.ModuleType.Sensor;
+    }
+
     private enum Axis {
         Y,
         Z

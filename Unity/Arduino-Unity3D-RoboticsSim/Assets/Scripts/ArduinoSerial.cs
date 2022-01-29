@@ -30,13 +30,14 @@ public class ArduinoSerial : MonoBehaviour {
 
 	void Start () {
 		arduino = new SerialPort (portName, baudRate);
+        arduino.ReadTimeout = 1000;
 		arduino.Open ();
 	}
 
 	void Update () {
         if(sending==false)Task.Run(Send);
         if(receiving==false)Task.Run(Receive);
-	}
+    }
 
     void Send() {
 		sending = true;
@@ -50,19 +51,22 @@ public class ArduinoSerial : MonoBehaviour {
 
     void Receive() {
 		receiving = true;
-		if (arduino.IsOpen) {
+        if (arduino.IsOpen)
+        {
             string str;
             str = arduino.ReadLine();
+
             var subStrings = str.Split(',');
-            
-            foreach(var ss in subStrings)
+            foreach (var ss in subStrings)
             {
+                if (ss == "")
+                    continue;
                 var pair = ss.Split(':');
                 if(pair.Length == 2 && pair[1]!="")
                     recievedData[pair[0]] = pair[1];
             }
-            
-		}
+
+        }
         Thread.Sleep(rate);
         receiving = false;
 	}

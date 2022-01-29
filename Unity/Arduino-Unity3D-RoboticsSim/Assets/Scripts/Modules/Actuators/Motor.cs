@@ -2,8 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Motor : Modules
+public class Motor : Module
 {
+    Motor()
+    {
+        moduleType = Module.ModuleType.Actuator;
+    }
+
     [SerializeField]
     private HingeJoint hingejoint;
 
@@ -22,8 +27,6 @@ public class Motor : Modules
         jointmotor.force = force;
         hingejoint.motor = jointmotor;
     }
-
-    // Update is called once per frame
     public override void SetValue(string newTargetVelocity){
         if(newTargetVelocity==null)return;
         jointmotor.targetVelocity = Mathf.Clamp(float.Parse(newTargetVelocity), -maxVelocity, maxVelocity);
