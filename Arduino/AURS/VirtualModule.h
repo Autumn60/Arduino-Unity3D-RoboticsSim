@@ -7,11 +7,9 @@ namespace AURS
 {
     class VirtualModule
     {
-    protected:
+    public:
         String moduleID;
         String value;
-
-    public:
         VirtualModule(String moduleID)
         {
             this->moduleID = moduleID;
@@ -21,7 +19,6 @@ namespace AURS
         {
             return moduleID;
         }
-        friend class Manager;
     }; // class VirtualModule
 } // namespace AURS
 
