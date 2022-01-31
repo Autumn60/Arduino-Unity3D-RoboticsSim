@@ -139,6 +139,7 @@ namespace AURS
 
         void Add(VirtualActuator *VA)
         {
+            Serial.println("ADDED");
             if (actuatorCount >= AURS_MAX_ACTUATOR_COUNT)
                 return;
             virtualActuators[actuatorCount] = VA;
@@ -155,5 +156,7 @@ namespace AURS
 } // namespace AURS
 
 #define UnityConnection AURS::Manager::get()
+
+#include "VirtualIO.h"
 
 #endif
