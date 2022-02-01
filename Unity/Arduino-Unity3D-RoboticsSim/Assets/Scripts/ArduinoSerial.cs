@@ -110,7 +110,8 @@ public class ArduinoSerial : MonoBehaviour {
     }
 
     void OnApplicationQuit(){
-        arduino.Close();
+        if(arduino!=null)
+            arduino.Close();
     }
 
     void SafeAction(Action action, bool message = true)
