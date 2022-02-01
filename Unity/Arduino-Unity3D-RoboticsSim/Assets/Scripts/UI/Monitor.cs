@@ -3,20 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Monitor : Module
+public class Monitor : MonoBehaviour
 {
-    Monitor()
-    {
-        moduleID = "VS";
-        moduleType = Module.ModuleType.Actuator;
-    }
-
     [SerializeField]
     Text textObj;
 
     [SerializeField]
-    string[] text = new string[10];
+    private string[] text = new string[8];
 
+    [SerializeField]
+    string nowText = "";
+
+    [SerializeField]
     private int textLength;
 
     // Start is called before the first frame update
@@ -29,18 +27,21 @@ public class Monitor : Module
     // Update is called once per frame
     void Update()
     {
+        
     }
 
-    public override void SetValue(string newText)
+    public void Add(string newText)
     {
-        string tmp = "";
-        for(int i = 0; i < textLength - 1; i++)
+        newText = newText.Replace(" ", "\u00A0");
+        nowText = "";
+        textLength = text.Length;
+        for (int i = 0; i < textLength - 1; i++)
         {
             text[i] = text[i + 1];
-            tmp += (text[i]+'\n');
+            nowText += (text[i] + '\n');
         }
-        tmp += text[textLength - 1] = newText;
-        textObj.text = tmp;
+        nowText += text[textLength - 1] = newText;
+        textObj.text = nowText;
     }
 
     public void Clear()
