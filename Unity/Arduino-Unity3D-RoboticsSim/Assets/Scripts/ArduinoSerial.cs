@@ -12,7 +12,7 @@ public class ArduinoSerial : MonoBehaviour {
     public string portName = "COM";
 
     [SerializeField]
-    private int baudRate = 250000;
+    public int baudrate = 250000;
 
     [SerializeField]
 	private int rate = 100;
@@ -31,22 +31,27 @@ public class ArduinoSerial : MonoBehaviour {
     readonly object lockObject = new object();
 
 	void Start () {
-        //arduino = new SerialPort (portName, baudRate);
-        //arduino.ReadTimeout = 1000;
-        //arduino.Open ();
 	}
 
-    public void Begin()
+    public bool Begin()
     {
-        arduino = new SerialPort(portName, baudRate);
+        string[] ports = SerialPort.GetPortNames();
+        int index = Array.IndexOf(ports, portName);
+        if(index < 0)
+        {
+            return false;
+        }
+        arduino = new SerialPort(portName, baudrate);
         arduino.ReadTimeout = 1000;
         arduino.Open();
         isRunning = true;
+        return true;
     }
 
     public void End()
     {
-        arduino.Close();
+        if(arduino!=null&&arduino.IsOpen)
+            arduino.Close();
         isRunning = false;
     }
 
@@ -110,7 +115,7 @@ public class ArduinoSerial : MonoBehaviour {
     }
 
     void OnApplicationQuit(){
-        arduino.Close();
+        End();
     }
 
     void SafeAction(Action action, bool message = true)
