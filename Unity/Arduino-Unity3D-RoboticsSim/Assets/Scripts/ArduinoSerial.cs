@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 public class ArduinoSerial : MonoBehaviour {
 
     [SerializeField]
-    private string portName = "COM";
+    public string portName = "COM";
 
     [SerializeField]
-    private int baudRate = 9600;
+    private int baudRate = 250000;
 
     [SerializeField]
 	private int rate = 100;
@@ -22,6 +22,8 @@ public class ArduinoSerial : MonoBehaviour {
 
 	SerialPort arduino;
 
+    private bool isRunning = false;
+
     [SerializeField]
     private string sendingData = "";
 
@@ -29,12 +31,27 @@ public class ArduinoSerial : MonoBehaviour {
     readonly object lockObject = new object();
 
 	void Start () {
-		arduino = new SerialPort (portName, baudRate);
-        arduino.ReadTimeout = 1000;
-		arduino.Open ();
+        //arduino = new SerialPort (portName, baudRate);
+        //arduino.ReadTimeout = 1000;
+        //arduino.Open ();
 	}
 
+    public void Begin()
+    {
+        arduino = new SerialPort(portName, baudRate);
+        arduino.ReadTimeout = 1000;
+        arduino.Open();
+        isRunning = true;
+    }
+
+    public void End()
+    {
+        arduino.Close();
+        isRunning = false;
+    }
+
 	void Update () {
+        if (!isRunning) return;
         if(sending==false)Task.Run(Send);
         if(receiving==false)Task.Run(Receive);
     }
