@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/ArmSim.unity
+    guid: ca59728fb8a5dd24ebe17b82241ef87c
   m_configObjects: {}
