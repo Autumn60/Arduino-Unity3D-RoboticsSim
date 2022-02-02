@@ -9,18 +9,8 @@ public class AirCylinder : Module
         moduleType = Module.ModuleType.Actuator;
     }
 
-    enum Axis
-    {
-        X,
-        Y,
-        Z
-    };
-
     [SerializeField]
     private ConfigurableJoint joint;
-
-    [SerializeField]
-    private Axis axis;
 
     [SerializeField]
     private float distance = 1.0f;
@@ -56,22 +46,8 @@ public class AirCylinder : Module
         joint.xMotion = ConfigurableJointMotion.Limited;
         joint.yMotion = ConfigurableJointMotion.Locked;
         joint.zMotion = ConfigurableJointMotion.Locked;
-
-        switch (axis)
-        {
-            case Axis.X:
-                joint.axis = new Vector3(1, 0, 0);
-                joint.connectedAnchor = new Vector3(0, distance*0.5f, 0);
-                break;
-            case Axis.Y:
-                joint.axis = new Vector3(0, 1, 0);
-                joint.connectedAnchor = new Vector3(-distance * 0.5f, 0, 0);
-                break;
-            case Axis.Z:
-                joint.axis = new Vector3(0, 0, 1);
-                joint.connectedAnchor = new Vector3(0, 0, -distance * 0.5f);
-                break;
-        }
+        joint.axis = new Vector3(0, 0, 1);
+        joint.connectedAnchor = new Vector3(0, 0, -distance * 0.5f);
         joint.angularXMotion = ConfigurableJointMotion.Locked;
         joint.angularYMotion = ConfigurableJointMotion.Locked;
         joint.angularZMotion = ConfigurableJointMotion.Locked;
